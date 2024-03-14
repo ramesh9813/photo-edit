@@ -1,7 +1,7 @@
  
 import './App.css';
 import myImage from './image/imag.jpg';
-import React,{useEffect, useState} from 'react';
+import React,{ useState} from 'react';
 
 function App() {
   const filter = {
@@ -141,9 +141,29 @@ function App() {
     
     setImageChange(combinedStyles)
   }
+
+  const handleReset=()=>{
+    setImageChange(concatenateStyles(filter))
+  }
   
+  const handleDownload = () => {
+    // Check if the image URL is valid
+    if (myImage) {
+      // Create a new anchor element
+      const link = document.createElement('a');
+      link.href = myImage;
+      link.download = 'image.jpg'; // You can change the filename as needed
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <>
+    <div className="imageLink">
+
+    </div>
     <div className="container d-flex mt-3">
 
     <div className="image first">
@@ -155,7 +175,7 @@ function App() {
    
 
     <div className="controller second">
-   
+      <input type="reset" value="reset" onClick={handleReset} />
             {/* for bluring the image */}
       <div className="container blur">
         <label htmlFor="blur">Blur: </label>
@@ -213,6 +233,7 @@ function App() {
         <input type="range" id="sepia" name="sepia" min="0" max="200" value={ sepias} onChange={handleSepias}/>
           <span id="volumeValue"> {sepias}%</span>
       </div>
+      <button onClick={handleDownload}>Download Image</button>
       </div>
       </div>
       
