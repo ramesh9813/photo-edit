@@ -1,7 +1,7 @@
  
 import './App.css';
 import myImage from './image/imag.jpg';
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 
 function App() {
   const filter = {
@@ -34,17 +34,19 @@ function App() {
   const [sepias,setSepias] = useState(0)
   
 
-
+// useEffect(console.log(styles),[styles])
+  
 // handle blur control function 
   const handleBlurness=(e) => {
     e.preventDefault()
     setblur(`${e.target.value}`)
     setStyle((prev)=>{
-      const newcahnge={ ...prev, blurness: `blur(${(15/100)*e.target.value}px)` };
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle
+      return{
+        ...prev,
+        blurness: `blur(${(15/100)*e.target.value}px)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
   }
 
 // handle brightness control function
@@ -52,11 +54,12 @@ function App() {
     e.preventDefault()
     setBrights(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, brights: `brightness(${e.target.value}%)` };
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        brights: `brightness(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
 }
 
 //handle contrast of the image
@@ -64,11 +67,12 @@ function App() {
     e.preventDefault()
     setContrasts(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, contrasts: `contrast(${e.target.value}%)` };
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        contrasts: `contrast(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
   }
 
   // handle the gayscale  function
@@ -76,11 +80,13 @@ function App() {
     e.preventDefault()
     setGrayscales(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, grayscales: `grayscale(${e.target.value}%)`};
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        grayscales: `grayscale(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
+
   }
 
 
@@ -88,22 +94,24 @@ function App() {
     e.preventDefault()
     setInverts(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, inverts: `invert(${e.target.value}%)`};
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        inverts: `invert(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
   }
 
   const handleOpacitys=(e)=>{
     e.preventDefault()
     setOpacitys(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, opacitys: `opacity(${e.target.value}%)`};
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        opacitys: `opacity(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
   }
 
 
@@ -111,11 +119,12 @@ function App() {
     e.preventDefault()
     setSaturates(e.target.value)
     setStyle((prev)=>{
-      const newcahnge = { ...prev, saturates: `saturate(${e.target.value}%)` };
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
+      return{
+        ...prev,
+        saturates: `saturate(${e.target.value}%)`
+      }
     })
-    setImageChange(styles)
+    setImageChange(combinedStyles)
   }
 
     
@@ -123,12 +132,14 @@ function App() {
   const handleSepias=(e)=>{
     e.preventDefault()
     setSepias(e.target.value)
-    setStyle((prev)=>{
-      const newcahnge = { ...prev, sepias: `sepia(${e.target.value}%)` };
-      const newStyle=concatenateStyles(newcahnge)
-      return newStyle;
-    })
-    setImageChange(styles)
+    setStyle(prev => {
+      return {
+        ...prev,
+        sepia: `sepia(${e.target.value}%)`
+      };
+    });
+    
+    setImageChange(combinedStyles)
   }
   
   return (
