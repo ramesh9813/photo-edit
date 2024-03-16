@@ -1,7 +1,9 @@
  
 import './App.css';
+// import myImage from 'https://st2.depositphotos.com/3745557/7435/i/450/depositphotos_74355965-stock-photo-beautiful-oak-at-the-sunset.jpg';
 import myImage from './image/imag.jpg';
 import React,{ useState} from 'react';
+import DownloadImageButton from './DownloadImageButton ';
 
 function App() {
   const filter = {
@@ -22,7 +24,6 @@ function App() {
 
   const combinedStyles = concatenateStyles(styles);
 
-  
   const [imageChange, setImageChange] = useState(combinedStyles)
   const [blurs,setblur] = useState(0)
   const [brights,setBrights] = useState(100)
@@ -146,18 +147,7 @@ function App() {
     setImageChange(concatenateStyles(filter))
   }
   
-  const handleDownload = () => {
-    // Check if the image URL is valid
-    if (myImage) {
-      // Create a new anchor element
-      const link = document.createElement('a');
-      link.href = myImage;
-      link.download = 'image.jpg'; // You can change the filename as needed
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+
 
   return (
     <>
@@ -233,7 +223,8 @@ function App() {
         <input type="range" id="sepia" name="sepia" min="0" max="200" value={ sepias} onChange={handleSepias}/>
           <span id="volumeValue"> {sepias}%</span>
       </div>
-      <button onClick={handleDownload}>Download Image</button>
+      {/* <h2> {combinedStyles}</h2>  */}
+      <DownloadImageButton imageUrl={myImage} styles={concatenateStyles(styles)}/>
       </div>
       </div>
       
