@@ -2,8 +2,14 @@
 import './App.css';
 // import myImage from 'https://st2.depositphotos.com/3745557/7435/i/450/depositphotos_74355965-stock-photo-beautiful-oak-at-the-sunset.jpg';
 import myImage from './image/imag.jpg';
-import React,{ useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import DownloadImageButton from './DownloadImageButton ';
+
+const imgUrl="https://st2.depositphotos.com/3745557/7435/i/450/depositphotos_74355965-stock-photo-beautiful-oak-at-the-sunset.jpg"
+// useEffect(()=>{
+
+
+// },[imgUrl])
 
 function App() {
   const filter = {
@@ -20,8 +26,8 @@ function App() {
     const singleLineStyle = {filter:Object.values(obj).join(' ')}
     return singleLineStyle
   }
+  
   const [styles,setStyle]= useState(filter);
-
   const combinedStyles = concatenateStyles(styles);
 
   const [imageChange, setImageChange] = useState(combinedStyles)
@@ -35,6 +41,20 @@ function App() {
   const [sepias,setSepias] = useState(0)
   
 
+  // image  upload functionality 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+console.log(selectedImage)
 // useEffect(console.log(styles),[styles])
   
 // handle blur control function 
@@ -152,13 +172,13 @@ function App() {
   return (
     <>
     <div className="imageLink">
-
     </div>
     <div className="container d-flex mt-3">
 
     <div className="image first">
     <div className="container ">
-     <img src={myImage} height="400"alt="" style={imageChange}/>
+     {/* <img src={myImage || selectedImage} height="400"alt="" style={imageChange}/> */}
+     <img src={ selectedImage} height="400"alt="" style={imageChange}/>
      <hr />
     </div>
     </div>
@@ -166,6 +186,9 @@ function App() {
 
     <div className="controller second">
       <input type="reset" value="reset" onClick={handleReset} />
+      <input type="file" accept="image/*" onChange={handleImageChange} />
+
+
             {/* for bluring the image */}
       <div className="container blur">
         <label htmlFor="blur">Blur: </label>
@@ -224,7 +247,7 @@ function App() {
           <span id="volumeValue"> {sepias}%</span>
       </div>
       {/* <h2> {combinedStyles}</h2>  */}
-      <DownloadImageButton imageUrl={myImage} styles={concatenateStyles(styles)}/>
+      <DownloadImageButton imageUrl={selectedImage} styles={concatenateStyles(styles)}/>
       </div>
       </div>
       

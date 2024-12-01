@@ -6,7 +6,7 @@ const DownloadImageButton = ({ imageUrl, styles }) => {
   const downloadImage = () => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    const img = imageRef.current;
+    // const img = imageRef.current;
 
     const imgElement = new Image();
     imgElement.crossOrigin = 'anonymous'; // Handle CORS for external images
@@ -33,7 +33,7 @@ const DownloadImageButton = ({ imageUrl, styles }) => {
   return (
     <div>
       <img ref={imageRef} src={imageUrl} alt="Download" style={{ display: 'none' }} />
-      <button onClick={downloadImage}>Download Image</button>
+      <button onClick={downloadImage}className='btn btn-primary'>Download Image</button>
     </div>
   );
 };
