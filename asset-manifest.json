@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/photo-edit/static/css/main.e6c13ad2.css",
+    "main.js": "/photo-edit/static/js/main.654d8468.js",
+    "static/media/imag.jpg": "/photo-edit/static/media/imag.c0f81735261549f8a0d6.jpg",
+    "index.html": "/photo-edit/index.html",
+    "main.e6c13ad2.css.map": "/photo-edit/static/css/main.e6c13ad2.css.map",
+    "main.654d8468.js.map": "/photo-edit/static/js/main.654d8468.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.654d8468.js"
+  ]
+}
